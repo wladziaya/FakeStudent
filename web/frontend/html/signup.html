@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link href="../frontend/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>FAKE STUDENT</header>
+    <main>
+        <div>
+            <div id="signForm">
+                <input id="firstname" type="text" placeholder="First name" value="" onkeyup="validname(this)" required>
+                <input id="lastname" type="text" placeholder="Last name" value="" onkeyup="validname(this)" required>
+                <input id="login" type="text" placeholder="Username" value="" onkeyup="valid(this)" required>
+                <input id="password" type="password" placeholder="Password" onkeyup="valid(this)" pattern=".{5,12}" title="The minimum number of characters require is 5, maximum 12" maxlength="12" size="12" required  >
+                <button onclick="sign()">Sign up</button>
+                <div>
+                    <p>Have an account? <a href="http://localhost:8000/users/signin">Sign in</a></p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div>© 2021 Fake Student. All Rights Reserved.</div>
+        <div class="athors">Bogdan Chernykh, Vlada Yaremenko, Alex Gryshyn</div>
+    </footer>
+    <script>
+        let sign = async () => {
+            let user = {
+                firstName: document.getElementById("firstname").value,
+                lastName: document.getElementById("lastname").value,
+                username: document.getElementById("login").value,
+                password: document.getElementById("password").value
+            }
+            console.log(user)
+            const response = await fetch('http://localhost:8000/users/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(user)
+            });
+            console.log(response)
+            console.log(`redirected=${response.redirected}`)
+
+            // If entered data don`t pass validation on server side or something like this
+            if (!response.redirected) {
+                const responseBody = await response.json()
+                console.log(responseBody)
+                alert(`Error: code: ${responseBody.error.code}\nMessage: ${responseBody.error.message}`)
+                return
+            }
+            // If everything alrigth server redirects user to main page, but need to update the page
+            location.reload()
+        }
+    </script>
+    <script src="../frontend/js/validation.js"></script>
+</body>
+
+</html>
