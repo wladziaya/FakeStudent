@@ -1,0 +1,236 @@
+body {
+    font-family: Georgia, serif;
+    background: #046c72;
+    margin: 0;
+    /* overflow: hidden; */
+}
+
+header {
+    padding: 4vh;
+    text-align: center;
+    background: #043d40;
+    color: #b2eff2;
+    /* background: #b2eff2;
+    color: #046c72; */
+    font-size: 30px;
+}
+
+footer {
+    padding: 2vh;
+    background: #043d40;
+    color: #b2eff2;
+    text-align: end;
+
+}
+
+.athors {
+    margin-top: 10px;
+}
+
+label {
+    display: block;
+    color: #b2eff2;
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#signForm a {
+    color: #b2eff2;
+}
+
+#signForm p {
+    color: #fff;
+}
+
+#signForm button, button {
+    width: 50%;
+    background-color: #b2eff2;
+    border: 1px solid #b2eff2;
+    color: #046c72;
+}
+
+#signForm button:hover {
+    opacity: 0.8;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#signForm, #error404, #tasks {
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    height: 77.5vh;
+    width: 60vw;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+#signForm input, #addtask input, select,  #edittask input  {
+    width: 100%;
+    background-color: #11939A;
+    border: 1px solid #11939A;
+    color: rgb(76, 76, 76);
+
+}
+
+#hide {
+    float:right;
+    color: red;
+    background: none;
+    border: none;
+    width: fit-content;
+    margin: 0;
+
+}
+
+#addtask, #edittask {
+    background: #043d40; position: absolute; height: fit-content; width: 48vw; border: 2px solid #11939a;
+    border-radius: 2em;
+    min-width: 300px;
+    display: none;
+}
+
+.tasklist {
+    background-color: #11939A;
+    margin: 10px auto;
+    width: 80%;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
+    color: #d8f9fb;
+    border-radius: 0.5em;
+    padding-bottom: 5px;
+
+}
+
+.mainBtn {
+    position: absolute;
+    right: 0;
+}
+
+.mainBtn button {
+    border-radius: 1em;
+    font-size: 15px;
+    border-radius: 1em;
+    font-size: 15px;
+    margin: 4px;
+    margin-bottom: 0;
+}
+
+.title {
+    text-align: center;
+  width: 100%;
+  font-size: 20px;
+}
+
+#addtask input, select,  #edittask input{
+    max-width: 480px;
+    margin: 15px;
+    outline: none;
+    line-height: 1.5rem;
+    padding: 10px;
+    border-radius: 15px;
+    font-family: inherit;
+    font-size: 20px;
+    width: -webkit-fill-available;
+    color: rgb(76, 76, 76);
+}
+
+#signForm button,
+#signForm input, 
+ #addtask button, #addbutton, #signout, #edittask button {
+    max-width: 480px;
+    margin: 15px;
+    outline: none;
+    line-height: 1.5rem;
+    padding: 16px;
+    border-radius: 15px;
+    font-family: inherit;
+    font-size: 20px;
+}
+
+.titleDiv {
+    display: contents;
+}
+
+.allinfo {
+    display: none;
+    margin: 0 20px;
+    text-align: left;
+}
+
+.maininfo {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin: 5px auto;
+    height: 50px;
+    padding-bottom: 5px;
+}
+
+.showInfoBtn {
+    width: fit-content;
+    background: none;
+    color: #d8f9fb;
+    border: none;
+    font-size: inherit;
+}
+
+.showInfoBtn:hover {
+    color: #046c72;
+}
+
+#signout {
+    float: right;
+    width: fit-content;
+    margin: 0;
+    padding: 7px;
+
+}
+
+#signForm input::-moz-placeholder {
+    color: rgb(76, 76, 76);
+}
+
+#signError {
+    display: none;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 7px;
+    border-radius: 0.7em;
+}
+
+#signForm input::-webkit-input-placeholder {
+    color: rgb(76, 76, 76);
+}
+
+#addtask input::-moz-placeholder,
+#edittask input::-moz-placeholder {
+    color: rgb(76, 76, 76);
+}
+
+#addtask input::-webkit-input-placeholder,
+#edittask input::-webkit-input-placeholder {
+    color: rgb(76, 76, 76);
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgb(123 121 121 / 60%);
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}

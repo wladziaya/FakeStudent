@@ -27,6 +27,18 @@ class UserRepository {
             throw new Error(error)
         }
     }
+
+    async findById(id) {
+        try {
+            const sql = 'SELECT username, first_name, last_name FROM user WHERE id = ?'
+            const conn = await mysql.createConnection(db)
+            const [rows] = await conn.query(sql, [id])
+            await conn.end()
+            return rows[0]
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
 }
 
 module.exports = UserRepository

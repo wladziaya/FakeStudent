@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in</title>
     <link href="../frontend/css/styles.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -16,7 +17,10 @@
             <div id="signForm">
                 <input id="login" type="text" placeholder="Username" minlength="4" onkeyup="valid(this)" required>
                 <input id="password" type="password" placeholder="Password" pattern=".{5,12}"
-                    title="The minimum number of characters require is 5, maximum 12" maxlength="12" size="12" onkeyup="valid(this)" required>
+                    title="The minimum number of characters require is 5, maximum 12" maxlength="12" size="12"
+                    onkeyup="valid(this)" required>
+                <div id="signError">Incorrect username or password</div>
+
                 <button type="submit" onclick="sign()">Sign in</button>
                 <div>
                     <p>Don't have an account? <a href="http://localhost:8000/users/signup">Sign up</a></p>
@@ -27,7 +31,7 @@
     </main>
     <footer>
         <div>© 2021 Fake Student. All Rights Reserved.</div>
-        <div class="athors">Vlada Yaremenko, Saiko Sabrina </div>
+        <div class="athors"> Vlada Yaremenko,  Saiko Sabrina</div>
     </footer>
     <script>
         let sign = async () => {
@@ -35,8 +39,8 @@
                 username: document.getElementById("login").value,
                 password: document.getElementById("password").value
             }
-            console.log(user)
-            const response = await fetch('http://localhost:8000/users/signin', {
+            if (user.username && user.password) {
+                const response = await fetch('http://localhost:8000/users/signin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -48,14 +52,16 @@
             console.log(`redirected=${response.redirected}`)
 
             // If entered data don`t pass validation on server side or there is no such user or incorrect password
-            if (!response.redirected) {   
+            if (!response.redirected) {
                 const responseBody = await response.json()
                 console.log(responseBody)
-                alert(`Error: code: ${responseBody.error.code}\nMessage: ${responseBody.error.message}`)
+                // alert(`Error: code: ${responseBody.error.code}\nMessage: ${responseBody.error.message}`)
+                document.getElementById('signError').style.display = 'block'
                 return
             }
             // If everything alrigth server redirects user to main page, but need to update the page
             location.reload()
+            }
         }
     </script>
     <script src="../frontend/js/validation.js"></script>

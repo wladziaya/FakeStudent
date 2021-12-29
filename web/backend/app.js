@@ -19,10 +19,8 @@ const port = 8000
 
 const routing = {
     'GET': {
-        '/': async (client) => {
-            client.res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-            return '<h1>Main page</h1>'
-        },
+        '/': async (client) => await assetsController.getMainPage(client),
+        '/users': async (client) => await userController.findById(client),
         '/users/signin': async (client) => userController.signInGet(client),
         '/users/signup': async (client) => userController.signUpGet(client),
         '/tasks': async (client) => taskController.findAll(client),
@@ -104,8 +102,7 @@ const server = http.createServer(async (req, res) => {
         await logger.debug(`hadler: ${handler}`)
 
         if (!handler) {
-            res.statusCode = 404
-            res.end('Not Found 404')
+            res.end(await assetsController.getNotFoundPage(client))
         }
 
         const patchedHandler = securityPatch(handler)

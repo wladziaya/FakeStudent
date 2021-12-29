@@ -18,7 +18,13 @@ class TaskRepository {
 
     async findAll(userId) {
         try {
-            const sql = 'SELECT * FROM task WHERE user_id = ?'
+            const sql = `
+                SELECT t.id, t.title, t.url, t.dttm, r.delta, r.title AS repeatTitle, p.title AS platformTitle
+                FROM test.task AS t
+                INNER JOIN \`repeat\` AS r ON t.id = r.task_id
+                INNER JOIN \`platform\` AS p ON t.id = p.task_id
+                WHERE user_id = ?;
+            `
             const conn = await mysql.createConnection(db)
             const [rows] = await conn.query(sql, [userId])
             await conn.end()
@@ -30,14 +36,14 @@ class TaskRepository {
 
     async update(task) {
         try {
-            const { id, title, url, dttm, userId, statusId } = task
+            const { id, title, url, dttm, userId } = task
             const sql = `
                 UPDATE task SET
-                user_id = ?, title = ?, url = ?, dttm = ?, status_id = ?
+                user_id = ?, title = ?, url = ?, dttm = ?
                 WHERE id = ? AND user_id = ?
             `
             const conn = await mysql.createConnection(db)
-            const [rows] = await conn.query(sql, [userId, title, url, dttm, statusId, id, userId])
+            const [rows] = await conn.query(sql, [userId, title, url, dttm, id, userId])
             await conn.end()
             return rows.changedRows
         } catch (error) {

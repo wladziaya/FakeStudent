@@ -29,7 +29,7 @@ class TaskController {
             const { title, url, dttm, delta, repeatTitle, platformTitle } = body
             const session = await Session.get(client)
     
-            const task = new Task(undefined, title, url, dttm, session['user_id'], 0)
+            const task = new Task(undefined, title, url, dttm, session['user_id'], 1)
             const taskId = await this.taskService.create(task)
             await logger.debug('Create: Task created')
     
@@ -53,7 +53,7 @@ class TaskController {
         try {
             const { res } = client
             const session = await Session.get(client)
-            res.writeHead(200, {'Content-Type': 'application/json'})    
+            res.writeHead(200, {'Content-Type': 'application/json'})
             const result = await this.taskService.findAll(session['user_id'])
             await logger.debug(`FindAll: ${result.length} Tasks found`)
             return result
@@ -70,7 +70,7 @@ class TaskController {
             const { taskId, title, url, dttm, delta, repeatTitle, platformTitle } = body
             const session = await Session.get(client)
     
-            const task = new Task(taskId, title, url, dttm, session['user_id'], 0)
+            const task = new Task(taskId, title, url, dttm, session['user_id'], 1)
             const successUpdate = await this.taskService.update(task)
             await logger.debug(`Update: successUpdate=${successUpdate}`)
 

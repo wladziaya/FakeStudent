@@ -121,6 +121,15 @@ class UserController {
             await logger.error(error.message)
         }
     }
+
+    async findById(client) {
+        const { res } = client
+        const session = await Session.get(client)
+        const user = await this.userService.findById(session['user_id'])
+        await logger.debug(`FindById: ${user['username']}, ${user['first_name']}, ${user['last_name']}`)
+        res.writeHead(200, {'Content-Type': 'application/json'}) 
+        return {'username': user['username'], 'firstName': user['first_name'], 'lastName': user['last_name']}
+    }
 }
 
 module.exports = UserController

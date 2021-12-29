@@ -22,6 +22,10 @@ class UserService {
         }
     }
 
+    async findById(id) {
+        return await this.userRepository.findById(id)
+    }
+
 }
 
 module.exports = UserService
